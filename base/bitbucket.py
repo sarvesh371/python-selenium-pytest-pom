@@ -256,7 +256,7 @@ class BitBucketApi:
         params = {'pagelen': 100}
         url = urljoin(self.base, 'teams', client, "projects/")
         values = self.send_request(method="GET", url=url, params=params)
-        return [x['key'] for x in values if 'key' in x and x['key'] != 'DXPAR']
+        return [x['key'] for x in values if 'key' in x and x['key'] != 'TEST']
 
     def get_all_repos(self, client='company_name', slug=True):
         """
