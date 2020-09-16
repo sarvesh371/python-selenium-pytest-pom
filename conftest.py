@@ -226,6 +226,16 @@ def slack_message(request):
     return SlackNotification()
 
 
+@pytest.fixture(scope="session")
+def bit_bucket():
+    """
+    Fixture for Bitbucket Tokens
+    :return:
+    """
+    logger.debug(f"Connecting to BitBucket API Server")
+    return BitBucketApi()
+
+
 @pytest.fixture(scope='session')
 def web_driver():
     """

@@ -8,6 +8,7 @@ import pytest
 from urllib.parse import urlsplit, urlparse, urlunparse
 import re
 from collections import namedtuple
+from base.bitbucket import BitBucketApi
 from base.database import Database
 from base.jenkins import JenkinsAutomation
 from testrail_api import TestRailAPI
@@ -29,6 +30,8 @@ import uuid
 from kafka import KafkaConsumer
 import subprocess
 import base64
+import random
+import string
 
 logger = Logger(name="COMMON").get_logger
 
@@ -322,3 +325,23 @@ def base64_decode(data):
     username = decoded.split(":")[0]
     password = decoded.split(":")[1]
     return username, password
+
+
+def generate_random_alpha_numeric_string(length=10):
+    """
+    Function to generate Random Alpha Numeric String
+    :param length:
+    :return:
+    """
+    random_alpha_numeric_string = "".join(
+        random.choice(string.ascii_uppercase + string.digits) for _ in range(length)
+    )
+    return random_alpha_numeric_string
+
+def dict_to_ns(dictionary):
+    """
+    Convert Dictionary to Name-Spaced Items
+    :param dictionary:
+    :return:
+    """
+    return json_loads(json_dumps(dictionary), object_hook=lambda d: Namespace(**d))
