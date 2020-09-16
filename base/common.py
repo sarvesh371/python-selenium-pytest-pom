@@ -28,6 +28,7 @@ import allure
 import uuid
 from kafka import KafkaConsumer
 import subprocess
+import base64
 
 logger = Logger(name="COMMON").get_logger
 
@@ -297,3 +298,27 @@ def run_cmd(cmd, wait=True):
 def get_adb_device():
     devices = str(run_cmd("adb devices").output).strip()
     return re.findall(r"^(.*?)\s+device$", devices, re.I | re.M)
+
+
+def base64_encode(username, password):
+    """
+    Return Base64 encoded string
+    :param username:
+    :param password:
+    :return:
+    """
+    encoded = str(base64.b64encode(bytes(f"{username}:{password}", "utf-8")), "ascii").strip()
+    return encoded
+
+
+def base64_decode(data):
+    """
+    Return Base64 encoded string
+    :return:
+    """
+    decoded = str(base64.b64decode(data), "ascii")
+    if len(decoded.split(":")) != 2:
+        raise Exception("This is not a valid username password encoded string !!")
+    username = decoded.split(":")[0]
+    password = decoded.split(":")[1]
+    return username, password
