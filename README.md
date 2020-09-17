@@ -16,3 +16,4 @@ This is a framework for automation web application using python with pytest and 
 5. screenshots - We will store all our screenshots in this folder
 6. allure_results - folder to save our allure report
 7. conftest - as it is heart of pytest, we will keep only fixture and pytest methods there
+8. requirements.txt - we will write all our dependency there and then download in one shot using `venv_setup.sh`
