@@ -194,7 +194,6 @@ class JenkinsAutomation(SendRestRequest):
         url = self.JOB_DETAILS.format(self.base_url, name)
         _content = self.send_request("GET", url=url).content
         for build in _content["allBuilds"]:
-            url = f"{build['url']}/api/json"
             timestamp = int(build["timestamp"] / 1000)
             result = build["result"]
             number = build["number"]
@@ -305,7 +304,7 @@ class JenkinsAutomation(SendRestRequest):
             try:
                 params = self.get_build_params(name, number)
                 artifacts = self.get_artifacts(name, number)
-            except (Exception, ValueError) as exp:
+            except (Exception, ValueError):
                 pass
 
             return params, artifacts

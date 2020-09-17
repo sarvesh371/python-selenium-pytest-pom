@@ -135,13 +135,3 @@ class Database:
             _query = f"DELETE FROM {table} {condition}"
             cur.execute(_query)
             return cur.rowcount
-
-    def insert_columns(self, query):
-        """
-        Function to insert new columns in db
-        :param query:
-        :return:
-        """
-        with self.connection.cursor(cursor_factory=RealDictCursor) as cur:
-            cur.execute(query)
-            return cur.rowcount

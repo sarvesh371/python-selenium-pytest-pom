@@ -1,7 +1,5 @@
 __author__ = "sarvesh.singh"
-"""
-Library to talk to Confluence and make changes etc.
-"""
+
 import re
 from base.common import base64_encode, urljoin
 from base.rest import SendRestRequest
@@ -96,6 +94,7 @@ class Confluence(SendRestRequest):
         """
         Update the confluence Page
         :param document_id:
+        :param req_body:
         :return:
         :rtype:
         """

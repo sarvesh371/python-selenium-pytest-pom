@@ -51,7 +51,6 @@ def basic_logging(name="BASIC", level=None):
     """
     if level is None:
         level = os.environ.get("LOG_LEVEL", "INFO")
-    # coloredlogs.install()
     root = logging.getLogger(name=name)
     root.setLevel(getattr(logging, level))
     handler = logging.StreamHandler(sys.stdout)
@@ -276,15 +275,6 @@ def generate_curl_command(method, headers, url, params=None, data=None):
     # We always save Curl Command in environment variable, so that we know (in-case) of an exception what was it.
     os.environ["CURL"] = command
     return command
-
-
-def e2e_guid():
-    """
-    Function to generate GUID
-    :return:
-    """
-    guid = str(uuid.uuid4())
-    return f"e2e-{guid}"
 
 
 def run_cmd(cmd, wait=True):
@@ -568,7 +558,7 @@ def is_key_there_in_dict(key, dictionary, empty_check=True, text=None):
                 pass
 
 
-def retry(retries=120, interval=5):
+def retry(retries=10, interval=4):
     def deco(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
