@@ -1,3 +1,5 @@
+__author__ = "sarvesh.singh"
+
 from jira import JIRA
 
 
@@ -116,6 +118,10 @@ class Jira:
         :return:
         """
         _result = self._run_query('status NOT IN ("Closed", "Done", "Rejected")')
+        if _result.total > 0:
+            return _result.iterable[0].key
+        else:
+            return None
 
     def _run_query(self, query):
         """

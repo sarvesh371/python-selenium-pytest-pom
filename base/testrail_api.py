@@ -1,9 +1,6 @@
 __author__ = "sarvesh.singh"
 
-from datetime import datetime, timedelta
-from pytz import timezone
-from testrail_api import TestRailAPI
-from base.common import get_resource_config
+from base.common import *
 
 
 class TestRailApi(TestRailAPI):

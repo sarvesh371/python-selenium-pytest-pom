@@ -1,12 +1,7 @@
 __author__ = "sarvesh.singh"
 
-import time
-import base64
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from base.common import urljoin
-from datetime import datetime
-from base.logger import Logger
 from base.rest import SendRestRequest
+from base.common import *
 
 logger = Logger(name="JENKINS").get_logger
 
@@ -194,7 +189,6 @@ class JenkinsAutomation(SendRestRequest):
         url = self.JOB_DETAILS.format(self.base_url, name)
         _content = self.send_request("GET", url=url).content
         for build in _content["allBuilds"]:
-            url = f"{build['url']}/api/json"
             timestamp = int(build["timestamp"] / 1000)
             result = build["result"]
             number = build["number"]
@@ -305,7 +299,7 @@ class JenkinsAutomation(SendRestRequest):
             try:
                 params = self.get_build_params(name, number)
                 artifacts = self.get_artifacts(name, number)
-            except (Exception, ValueError) as exp:
+            except (Exception, ValueError):
                 pass
 
             return params, artifacts

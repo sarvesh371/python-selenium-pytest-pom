@@ -1,3 +1,5 @@
+__author__ = "sarvesh.singh"
+
 from base.common import *
 
 logger = Logger(name="CONF_COMMON").get_logger
@@ -187,16 +189,26 @@ def jenkins():
 
 
 @pytest.fixture(scope="session", autouse=True)
-def test_rails(creds, request):
+def resources():
+    """
+    resources Fixture with all Credentials and Url
+    :return:
+    """
+    logger.debug(f"Reading Creds File")
+    return get_resource_config()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def test_rails(resources, request):
     """
     Get and fetch Test-Rail Creds
-    :param creds:
+    :param resources:
     :param request:
     :return:
     """
     logger.debug(f"Connecting to Test-Rails API Server")
     if request.config.getoption("--test-rail"):
-        data = creds.test_rails
+        data = resources.test_rails
         return TestRailAPI(
             url=data.url, email=data.email, password=data.api_key, exc=True, retry=10
         )

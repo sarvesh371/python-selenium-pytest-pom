@@ -1,9 +1,6 @@
 __author__ = "sarvesh.singh"
 
-import psycopg2
-import os
-from psycopg2.extras import RealDictCursor
-from base.logger import Logger
+from base.common import *
 
 
 class Database:
@@ -134,14 +131,4 @@ class Database:
         with self.connection.cursor(cursor_factory=RealDictCursor) as cur:
             _query = f"DELETE FROM {table} {condition}"
             cur.execute(_query)
-            return cur.rowcount
-
-    def insert_columns(self, query):
-        """
-        Function to insert new columns in db
-        :param query:
-        :return:
-        """
-        with self.connection.cursor(cursor_factory=RealDictCursor) as cur:
-            cur.execute(query)
             return cur.rowcount
