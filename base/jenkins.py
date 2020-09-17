@@ -1,12 +1,7 @@
 __author__ = "sarvesh.singh"
 
-import time
-import base64
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from base.common import urljoin
-from datetime import datetime
-from base.logger import Logger
 from base.rest import SendRestRequest
+from base.common import *
 
 logger = Logger(name="JENKINS").get_logger
 

@@ -1,24 +1,8 @@
 __author__ = "sarvesh.singh"
 
-import os
-from datetime import datetime
-from base.common import urlparse
-from functools import wraps
-from base.logger import Logger
+from base.common import *
 
-import allure
-import pytz
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
-from base.common import (
-    process_response,
-    generate_curl_command,
-    e2e_guid,
-    logger,
-)
-
-correlationId = e2e_guid()
+correlationId = generate_guid()
 
 
 def update_authentication(func):

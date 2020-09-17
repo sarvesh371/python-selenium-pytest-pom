@@ -1,12 +1,6 @@
 __author__ = 'sarvesh.singh'
 
 import distro
-import requests
-import zipfile
-import re
-from pathlib import Path
-from base.logger import Logger
-from base.common import run_cmd, get_adb_device
 from selenium import webdriver as seleniumWebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -15,10 +9,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from appium import webdriver
-import allure
 from PIL import Image
 import pathlib
-import os, time, base64
+from base.common import *
 
 
 class WebDriver:
@@ -357,7 +350,7 @@ class WebDriver:
         :param locator_type:
         :param time_out:
         """
-        element = WebDriverWait(self.driver, time_out).until(
+        WebDriverWait(self.driver, time_out).until(
             EC.element_to_be_clickable((self.get_locator_type(locator_type), element)))
 
     def explicit_visibility_of_element(self, element, locator_type, time_out):
@@ -556,10 +549,9 @@ class WebDriver:
         This function is used to capture the screen shot on web page/device
         :param file_name:
         """
-        ss_path = f"{os.getcwd()}/screen_shots/file_name"
-        png_image = f"{ss_path}.png"
-        self.driver.get_screenshot_as_file(png_image)
-        im1 = Image.open(rf"{png_image}")
+        ss_path = f"{os.getcwd()}/screen_shots/{file_name}.png"
+        self.driver.get_screenshot_as_file(ss_path)
+        im1 = Image.open(rf"{ss_path}")
         rgb_im = im1.convert('RGB')
         jpg_image = f"{ss_path}.jpg"
         rgb_im.save(rf"{jpg_image}")
@@ -669,14 +661,15 @@ class WebDriver:
         main_window = self.driver.current_window_handle
         return main_window
 
-    def open_and_switch_to_new_tab(self):
+    def open_and_switch_to_new_tab(self, index):
         """
         Open and switch to new tab
+        :param index
         :return:
         """
         self.driver.execute_script("window.open();")
         # switch to the new window which is second in window_handles array
-        self.driver.switch_to.window(self.driver.window_handles[1])
+        self.driver.switch_to.window(self.driver.window_handles[index])
 
     def close_tab_and_switch_to_main_tab(self, switch_window_name):
         """
@@ -693,7 +686,7 @@ class WebDriver:
         :return:
         """
         window = self.get_current_window()
-        self.open_and_switch_to_new_tab()
+        self.open_and_switch_to_new_tab(index=1)
         # open successfully
         self.open_website("chrome://downloads/")
         files = self.driver.execute_script(
@@ -718,7 +711,7 @@ class WebDriver:
         :return:
         """
         window = self.get_current_window()
-        self.open_and_switch_to_new_tab()
+        self.open_and_switch_to_new_tab(index=1)
         self.open_website("chrome://downloads/")
         files = self.driver.execute_script(
             """
@@ -777,4 +770,4 @@ if __name__ == "__main__":
     w = WebDriver(browser='chrome', remote='192.168.9.111', port='5432')
     w.open_website('http://www.yahoo.com')
     w.screen_shot('sample.png')
-    # w.__del__()
+    w.__del__()

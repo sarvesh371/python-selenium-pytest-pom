@@ -1,8 +1,7 @@
 __author__ = "sarvesh.singh"
 
-import re
-from base.common import base64_encode, urljoin
 from base.rest import SendRestRequest
+from base.common import *
 
 
 class Confluence(SendRestRequest):

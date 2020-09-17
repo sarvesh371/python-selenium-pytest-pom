@@ -1,9 +1,8 @@
 __author__ = "sarvesh.singh"
 
-import os
 from slack import WebClient
 from slack.errors import SlackApiError
-from base.common import get_resource_config, basic_logging
+from base.common import *
 
 
 class SlackNotification(WebClient):
@@ -82,7 +81,7 @@ class SlackNotification(WebClient):
                 user = f"{user}@test.com"
             try:
                 channel = self.get_user_from_email(user)
-            except (SlackApiError, ValueError, Exception) as exp:
+            except (SlackApiError, ValueError, Exception):
                 raise Exception(f"Problem with {user}")
 
         self.chat_postMessage(channel=channel, text=message)
@@ -167,4 +166,3 @@ if __name__ == "__main__":
         channel="test-slack",
         groups=["test-group"],
     )
-    print()

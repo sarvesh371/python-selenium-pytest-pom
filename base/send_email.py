@@ -1,7 +1,6 @@
 __author__ = "sarvesh.singh"
 
-import smtplib
-from base.common import base64_decode
+from base.common import *
 from email.message import EmailMessage
 
 

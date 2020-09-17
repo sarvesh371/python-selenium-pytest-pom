@@ -1,14 +1,6 @@
 __author__ = "sarvesh.singh"
 
-import re
-from base.common import (
-    urljoin, get_resource_config, basic_logging, urlparse, dict_to_ns
-)
-from time import sleep
-from base.logger import Logger
-from requests import (
-    session
-)
+from base.common import *
 
 
 class BitBucketApi:
