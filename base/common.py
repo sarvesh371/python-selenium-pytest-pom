@@ -8,6 +8,9 @@ import pytest
 from urllib.parse import urlsplit, urlparse, urlunparse
 import re
 from collections import namedtuple
+from functools import wraps
+import time
+import requests
 from base.bitbucket import BitBucketApi
 from base.database import Database
 from base.jenkins import JenkinsAutomation
@@ -21,6 +24,7 @@ from json import (
     load as json_load,
     dump as json_dump,
 )
+from faker import Faker
 from json import JSONDecodeError
 from types import SimpleNamespace as Namespace
 from datetime import datetime, date, timezone
@@ -32,6 +36,9 @@ import subprocess
 import base64
 import random
 import string
+from bs4 import BeautifulSoup
+import zipfile
+import secrets
 
 logger = Logger(name="COMMON").get_logger
 
@@ -338,6 +345,171 @@ def generate_random_alpha_numeric_string(length=10):
     )
     return random_alpha_numeric_string
 
+
+def generate_random_string(length=10):
+    """
+    Function to generate Random String
+    :param length:
+    :return:
+    """
+    random_string = "".join(
+        random.choice(string.ascii_uppercase) for _ in range(length)
+    )
+    return random_string
+
+
+def generate_guid():
+    """
+    Function to generate GUID
+    :return:
+    """
+    guid = str(uuid.uuid4())
+    return guid
+
+
+def generate_random_password(length=10):
+    """
+    Generate a Random Password of length characters
+    :param length:
+    :return:
+    """
+    alphabet = string.ascii_letters + string.digits
+    password = "".join(secrets.choice(alphabet) for _ in range(length))
+    return password
+
+
+def generate_random_number(low=0, high=99, include_all=False):
+    """
+    Function to generate a Random Number between low and high range
+    :param low: Lowest Random Number
+    :param high: Highest Random Number
+    :param include_all: Highest Random Number
+    :return: A Random number between Low and High
+    """
+    if include_all:
+        number = random.randint(low, high)
+    else:
+        number = random.randrange(low, high)
+    return number
+
+
+def generate_birth_date(member="adult"):
+    """
+    Function to generate Birth Date
+    :param member:
+    :return:
+    """
+    minor_range = list(range(1, 5))  # 1 to 5 years of minor
+    child_range = list(range(5, 10))  # 5 to 10 years of children
+    adult_range = list(range(22, 59))  # 22 years to 59 years of adults
+    year_today = int(datetime.now().year)
+
+    if member == "child":
+        start = year_today - child_range[-1]
+        end = year_today - child_range[0]
+    elif member == "minor":
+        start = year_today - minor_range[-1]
+        end = year_today - minor_range[0]
+    else:
+        start = year_today - adult_range[-1]
+        end = year_today - adult_range[0]
+
+    return date(
+        random.randint(start, end), random.randint(1, 12), random.randint(1, 28)
+    )
+
+
+def generate_phone_number(max_digits=10):
+    """
+    Function to generate phone number
+    :param max_digits:
+    :return:
+    """
+    return random.randint(10 ** (max_digits - 1), 10 ** max_digits - 1)
+
+
+def generate_first_name(from_saved=False):
+    """
+    Function to generate First Name
+    :return:
+    """
+    saved_ids = [
+        "Carol",
+        "Caroline",
+        "Carolyn",
+        "Deirdre",
+        "Chloe",
+        "Claire",
+        "Deirdre",
+        "Diana",
+        "Donna",
+        "Dorothy",
+        "Elizabeth",
+        "Zoe",
+        "Wendy",
+        "Wanda",
+        "Virginia",
+        "Victoria",
+        "Vanessa",
+        "Una",
+        "Tracey",
+        "Theresa",
+        "Sue",
+        "Stephanie",
+        "Sophie",
+        "Sonia",
+        "Sarah",
+        "Samantha",
+        "Sally",
+        "Ruth",
+    ]
+    if from_saved:
+        return random.choice(saved_ids)
+    else:
+        return str(Faker().first_name())
+
+
+def generate_last_name(from_saved=False):
+    """
+    Function to generate Last Name
+    :return:
+    """
+    saved_ids = [
+        "Simon",
+        "Stephen",
+        "Steven",
+        "Stewart",
+        "Thomas",
+        "Tim",
+        "Trevor",
+        "Victor",
+        "Warren",
+        "William",
+        "Alan",
+        "Elliott",
+        "Victor",
+        "Bryce",
+        "Finn",
+        "Brantley",
+        "Edward",
+        "Abraham",
+        "Sebastian",
+        "Sean",
+        "Sam",
+        "Robert",
+        "Richard",
+        "Piers",
+        "Phil",
+        "Peter",
+        "Paul",
+        "Owen",
+    ]
+    if from_saved:
+        return random.choice(saved_ids)
+    else:
+        return str(Faker().last_name())
+
+
 def dict_to_ns(dictionary):
     """
     Convert Dictionary to Name-Spaced Items
@@ -345,3 +517,276 @@ def dict_to_ns(dictionary):
     :return:
     """
     return json_loads(json_dumps(dictionary), object_hook=lambda d: Namespace(**d))
+
+
+def parse_html(content):
+    soup = BeautifulSoup(content, features="lxml")
+    return soup
+
+
+def compress_file(file_name):
+    """
+    Compress a file and return it's path
+    :param file_name
+    """
+    if str(file_name).endswith("zip"):
+        return file_name
+    else:
+        zip_name = ".".join([*[x for x in file_name.split(".")[0:-1]], *["zip"]])
+
+    _zip = zipfile.ZipFile(zip_name, "w")
+    _zip.write(file_name, compress_type=zipfile.ZIP_DEFLATED)
+    _zip.close()
+
+    return zip_name
+
+
+def is_key_there_in_dict(key, dictionary, empty_check=True, text=None):
+    """
+    Check if key is there in dictionary
+    :param key:
+    :param dictionary:
+    :param empty_check:
+    :param text:
+    :return:
+    """
+    if key not in dictionary:
+        if text is None:
+            logger.error(f"'{key}' not found in _content !!")
+            raise Exception(f"'{key}' not found in _content !!")
+        else:
+            logger.error(f"'{key}' not found in _content | {text}")
+            raise Exception(f"'{key}' not found in _content | {text}")
+    else:
+        if empty_check:
+            if isinstance(dictionary[key], (list, tuple, dict)):
+                if len(dictionary[key]) == 0:
+                    logger.debug(f"{key} is empty !!")
+            elif dictionary[key] is None:
+                pass
+            else:
+                pass
+
+
+def retry(retries=120, interval=5):
+    def deco(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            r = retries
+            final_exception = None
+            while r > 0:
+                try:
+                    response = func(*args, **kwargs)
+                except Exception as exp:
+                    r -= 1
+                    logger.info(f"{exp} :: {r} of {retries} Retries Left !!")
+                    time.sleep(interval)
+                    final_exception = exp
+                    pass
+                else:
+                    break
+            else:
+                logger.error(final_exception)
+                raise Exception(f"{retries} Retries Exhausted :: {final_exception} !!")
+            return response
+
+        return wrapper
+
+    return deco
+
+
+def send_post_request(url, data, headers, params=None):
+    """
+    Send simple Post Request
+    :param url:
+    :param data:
+    :param headers:
+    :param params:
+    :return:
+    """
+    response = requests.request(
+        "POST", url, data=data, headers=headers, params=params, verify=False
+    )
+    return process_response(response)
+
+
+def send_get_request(url, headers=None, params=None, timeout=None, report=True):
+    """
+    Send simple Post Request
+    :param url:
+    :param headers:
+    :param params:
+    :param timeout:
+    :param report:
+    :return:
+    """
+    if timeout:
+        response = requests.request(
+            "GET", url, headers=headers, params=params, timeout=timeout, verify=False
+        )
+    else:
+        response = requests.request(
+            "GET", url, headers=headers, params=params, verify=False
+        )
+
+    return process_response(response, report)
+
+
+def generate_test_plan(test_rails, cases):
+    """
+    Generate Test Plan in Test Rails
+    :param test_rails
+    :param cases
+    """
+    milestone = 50
+    configuration = 50
+    logger.debug(
+        f"Creating Test Plan: MileStone: {milestone} and Configuration: {configuration}"
+    )
+    data = None
+    # Generate a Test-Plan, retry till it is created. this is to handle 409 error sent by test-rails when it is in
+    # maintenance mode. So, there is no choice with this as the window can be as long as 30 minutes
+    created = False
+    while not created:
+        try:
+            plan_data = []
+            for suit in test_rails.suites.get_suites(project_id=1):
+                suite_id = suit["id"]
+                case_ids = test_rails.cases.get_cases(project_id=1, suite_id=suite_id)
+                case_ids = [x["id"] for x in case_ids if x["id"] in cases]
+                cases = list(set(cases) - set(case_ids))
+                if len(case_ids) == 0:
+                    continue
+                plan_data.append({
+                    "suite_id": suite_id,
+                    "include_all": False,
+                    "case_ids": case_ids,
+                    "config_ids": [configuration],
+                    "runs": [{
+                        "include_all": False,
+                        "case_ids": case_ids,
+                        "config_ids": [configuration],
+                    }],
+                })
+
+            # Raise Exception if all test-cases are not consumed
+            if len(cases) > 0:
+                raise Exception(f"Test-Cases {cases} are Orphans !! Please check in test-suits")
+
+            # Generate a test plan with data now
+            plan_id = test_rails.plans.add_plan(
+                project_id=1,
+                name='Test',
+                description='Test',
+                milestone_id=milestone,
+                entries=plan_data,
+            )
+            created = True
+
+            # Get Test-Cases against run-id for results submission
+            for count, _data in enumerate(plan_data):
+                suite_id = _data["suite_id"]
+                for entry in plan_id["entries"]:
+                    if suite_id == entry["suite_id"]:
+                        plan_data[count]["runs"][0].update(entry["runs"][0])
+                        break
+
+            logger.debug(f"Test Plan: {plan_id['id']}")
+            data = {"test_plan": plan_id["url"], "testRailData": plan_data, "plan_id": plan_id["id"]}
+        except (Exception, ValueError) as exp:
+            logger.error(f"Retrying as Test Plan Creation Failed with error {exp} ")
+            time.sleep(10)
+
+    return data
+
+
+def uncurl_from_curl(command):
+    """
+    Uncurl the curl command and return args for request command
+    """
+    url = None
+    if re.search(r"--request", command):
+        url = str(command.split(" ")[4]).replace("'", "")
+        method = str(re.search(r"--request\s+(.*?)\s+", command, re.I | re.M).group(1)).upper()
+        if re.search(r"--data-raw\s*'([^']*)'", command) is not None:
+            data = json_loads(re.search(r"--data-raw\s*'([^']*)'", command, re.I | re.M).group(1))
+        else:
+            data = None
+        headers = {
+            str(x.split(":")[0]).strip(): str(x.split(":")[1]).strip()
+            for x in re.findall(r"--header \'(.*?)\'", command, re.I | re.M)
+        }
+    else:
+        url = re.search(r"'(http.*?)'$", command, re.I | re.M).group(1)
+        method = str(re.search(r"-x\s+(.*?)\s+", command, re.I | re.M).group(1)).upper()
+        if re.search(r"-d\s*'(.*?)'", command) is not None:
+            data = json_loads(re.search(r"-d\s*'(.*?)'", command, re.I | re.M).group(1))
+        else:
+            data = None
+        headers = {
+            str(x.split(":")[0]).strip(): str(x.split(":")[1]).strip()
+            for x in re.findall(r"-H \"(.*?)\"", command, re.I | re.M)
+        }
+    return {"method": method, "url": url, "data": data, "headers": headers}
+
+
+def create_auth_basic_token(login, secret):
+    """
+    Function to create basic token from id and secret
+    :param login:
+    :param secret:
+    """
+    login = str(base64.b64decode(login), "ascii").strip()
+    secret = str(base64.b64decode(secret), "ascii").strip()
+    token = str(
+        base64.b64encode(bytes("%s:%s" % (login, secret), "utf-8")), "ascii"
+    ).strip()
+    return token
+
+
+def save_allure(data, name, save_dump=True):
+    """
+    Save allure report by converting data to Json
+    :param data:
+    :param name:
+    :param save_dump:
+    :type name:
+    :return:
+    """
+    if len(data) != 0:
+        if isinstance(data, str):
+            name = str(name).replace(".json", ".log")
+            allure.attach(data, name=name, attachment_type=allure.attachment_type.TEXT)
+            if save_dump:
+                with open(name, "w") as _fp:
+                    _fp.write(data)
+            return str
+        else:
+            dump = json_dumps(data, indent=2, sort_keys=True)
+            allure.attach(dump, name=name, attachment_type=allure.attachment_type.JSON)
+            if save_dump:
+                with open(name, "w") as _fp:
+                    _fp.write(dump)
+            return dump
+
+
+def save_json(data, name):
+    """
+    Save Json
+    :param data:
+    :param name:
+    :return:
+    """
+    with open(name, 'w') as _fp:
+        _fp.write(json_dumps(data, indent=2, sort_keys=True))
+
+
+def save_csv(data, name):
+    """
+    Save CSV
+    :param data:
+    :param name:
+    :return:
+    """
+    with open(name, 'w') as _fp:
+        _fp.write("\n".join(data))
