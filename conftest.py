@@ -1,6 +1,17 @@
 __author__ = "sarvesh.singh"
 
-from base.common import *
+from base.common import get_resource_config
+import os
+from collections import namedtuple
+import pytest
+from base.logger import Logger
+from base.database import Database
+from base.jenkins import JenkinsAutomation
+from base.testrail_api import TestRailAPI
+from base.slack_api import SlackNotification
+from base.bitbucket import BitBucketApi
+from base.web_drivers import WebDriver
+from kafka import KafkaConsumer
 
 logger = Logger(name="CONF_COMMON").get_logger
 

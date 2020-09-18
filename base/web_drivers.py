@@ -11,7 +11,19 @@ from selenium.webdriver.common.by import By
 from appium import webdriver
 from PIL import Image
 import pathlib
-from base.common import *
+from base.common import (
+    run_cmd,
+    get_adb_device,
+)
+from base.logger import Logger
+import zipfile
+import os
+import re
+import time
+import requests
+from pathlib import Path
+import base64
+import allure
 
 
 class WebDriver:

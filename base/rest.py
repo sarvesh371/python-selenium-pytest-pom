@@ -1,6 +1,16 @@
 __author__ = "sarvesh.singh"
 
-from base.common import *
+from base.common import (
+    generate_guid,
+    process_response,
+    generate_curl_command,
+)
+from functools import wraps
+from base.logger import Logger
+from requests.adapters import HTTPAdapter
+import os
+import requests
+from urllib3.util.retry import Retry
 
 correlationId = generate_guid()
 

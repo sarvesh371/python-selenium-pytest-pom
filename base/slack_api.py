@@ -2,7 +2,11 @@ __author__ = "sarvesh.singh"
 
 from slack import WebClient
 from slack.errors import SlackApiError
-from base.common import *
+from base.common import (
+    basic_logging,
+    get_resource_config
+)
+import os
 
 
 class SlackNotification(WebClient):

@@ -1,6 +1,9 @@
 __author__ = "sarvesh.singh"
 
-from base.common import *
+from base.logger import Logger
+import psycopg2
+from psycopg2.extras import RealDictCursor
+import os
 
 
 class Database:

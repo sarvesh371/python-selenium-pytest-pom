@@ -4,35 +4,26 @@ from base.logger import Logger
 import os
 import logging
 import sys
-import pytest
-from urllib.parse import urlsplit, urlparse, urlunparse
+from urllib.parse import urlparse, urlunparse
 import re
 from collections import namedtuple
 from functools import wraps
 import time
 import requests
-from base.bitbucket import BitBucketApi
-from base.database import Database
-from base.jenkins import JenkinsAutomation
-from testrail_api import TestRailAPI
-from base.slack_api import SlackNotification
-from base.web_drivers import WebDriver
 from pathlib import Path
 from json import (
     dumps as json_dumps,
     loads as json_loads,
     load as json_load,
-    dump as json_dump,
 )
 from faker import Faker
 from json import JSONDecodeError
 from types import SimpleNamespace as Namespace
-from datetime import datetime, date, timezone, timedelta
+from datetime import datetime, date, timezone
 import pytz
 from pytz import timezone
 import allure
 import uuid
-from kafka import KafkaConsumer
 import subprocess
 import base64
 import random
@@ -40,14 +31,7 @@ import string
 from bs4 import BeautifulSoup
 import zipfile
 import secrets
-from time import sleep
-from requests import session
-import psycopg2
-from psycopg2.extras import RealDictCursor
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
-import smtplib
+import logging.handlers
 
 logger = Logger(name="COMMON").get_logger
 
@@ -789,3 +773,8 @@ def save_csv(data, name):
     """
     with open(name, 'w') as _fp:
         _fp.write("\n".join(data))
+
+
+if __name__ == "__main__":
+    _out = run_cmd("uname")
+    print(_out)

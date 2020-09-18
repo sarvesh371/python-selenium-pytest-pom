@@ -1,6 +1,10 @@
 __author__ = "sarvesh.singh"
 
-from base.common import *
+from base.common import (
+    get_resource_config,
+    datetime
+)
+from testrail_api import TestRailAPI
 
 
 class TestRailApi(TestRailAPI):
