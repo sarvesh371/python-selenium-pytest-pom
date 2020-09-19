@@ -1,0 +1,156 @@
+{
+  "uid" : "fdbb3aca92f10914",
+  "name" : "test_01_launch_flipkart",
+  "fullName" : "tests.test_01_flipkart.TestFlipkart#test_01_launch_flipkart",
+  "historyId" : "4a8f0304ed682404f2e6a7882302e57e",
+  "time" : {
+    "start" : 1600531752273,
+    "stop" : 1600531766372,
+    "duration" : 14099
+  },
+  "description" : "\n        Load flipkart website\n        :return:\n        :param web_driver\n        :param resources\n        ",
+  "descriptionHtml" : "<pre><code>    Load flipkart website\n    :return:\n    :param web_driver\n    :param resources\n</code></pre>\n",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "_session_faker",
+    "time" : {
+      "start" : 1600531748971,
+      "stop" : 1600531749093,
+      "duration" : 122
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "web_driver",
+    "time" : {
+      "start" : 1600531749094,
+      "stop" : 1600531752271,
+      "duration" : 3177
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "resources",
+    "time" : {
+      "start" : 1600531749093,
+      "stop" : 1600531749093,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "json_environment",
+    "time" : {
+      "start" : 1600531749093,
+      "stop" : 1600531749093,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "description" : "\n        Load flipkart website\n        :return:\n        :param web_driver\n        :param resources\n        ",
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "29d7ce234078de52",
+      "name" : "test.png",
+      "source" : "29d7ce234078de52.png",
+      "type" : "image/png",
+      "size" : 753235
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "web_driver::0",
+    "time" : {
+      "start" : 1600531766373,
+      "stop" : 1600531766489,
+      "duration" : 116
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "tag",
+    "value" : "run(order=1)"
+  }, {
+    "name" : "tag",
+    "value" : "FLIPKART"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "suite",
+    "value" : "test_01_flipkart"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestFlipkart"
+  }, {
+    "name" : "host",
+    "value" : "Sarvesh-Singh"
+  }, {
+    "name" : "thread",
+    "value" : "5786-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_01_flipkart"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ "run(order=1)", "FLIPKART" ]
+  },
+  "source" : "fdbb3aca92f10914.json",
+  "parameterValues" : [ ]
+}

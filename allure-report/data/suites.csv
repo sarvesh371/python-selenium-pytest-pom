@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Sep 19 21:39:12 IST 2020","Sat Sep 19 21:39:26 IST 2020","14099","tests","test_01_flipkart","TestFlipkart","","","test_01_launch_flipkart","
+        Load flipkart website
+        :return:
+        :param web_driver
+        :param resources
+        "

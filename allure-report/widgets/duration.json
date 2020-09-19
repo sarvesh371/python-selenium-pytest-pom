@@ -1,0 +1,11 @@
+[ {
+  "uid" : "fdbb3aca92f10914",
+  "name" : "test_01_launch_flipkart",
+  "time" : {
+    "start" : 1600531752273,
+    "stop" : 1600531766372,
+    "duration" : 14099
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

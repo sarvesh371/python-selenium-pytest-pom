@@ -18,3 +18,4 @@ class TestFlipkart:
         :param resources
         """
         web_driver.open_website(url=resources.url.flipkart.url)
+        web_driver.allure_attach_jpeg("test")

@@ -561,13 +561,9 @@ class WebDriver:
         This function is used to capture the screen shot on web page/device
         :param file_name:
         """
-        ss_path = f"{os.getcwd()}/screen_shots/{file_name}.png"
+        ss_path = f"{os.getcwd()}/screenshots/{file_name}.png"
         self.driver.get_screenshot_as_file(ss_path)
-        im1 = Image.open(rf"{ss_path}")
-        rgb_im = im1.convert('RGB')
-        jpg_image = f"{ss_path}.jpg"
-        rgb_im.save(rf"{jpg_image}")
-        return jpg_image
+        return ss_path
 
     def allure_attach_jpeg(self, file_name):
         """
@@ -576,7 +572,7 @@ class WebDriver:
         """
         with open(self.screen_shot(file_name), "rb") as image:
             byte_image = bytearray(image.read())
-        allure.attach(byte_image, name=f"{file_name}.jpg", attachment_type=allure.attachment_type.JPG)
+        allure.attach(byte_image, name=f"{file_name}.png", attachment_type=allure.attachment_type.PNG)
 
     def select_by_index(self, element, locator_type, index):
         """

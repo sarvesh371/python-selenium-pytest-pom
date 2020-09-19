@@ -130,3 +130,5 @@ dmypy.json
 /report.json
 /report.xml
 /allure-results/
+/screenshots/
+/allure-report/

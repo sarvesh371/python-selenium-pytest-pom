@@ -1,0 +1,26 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "Sarvesh-Singh",
+    "children" : [ {
+      "name" : "5786-MainThread",
+      "children" : [ {
+        "name" : "test_01_launch_flipkart",
+        "uid" : "fdbb3aca92f10914",
+        "parentUid" : "ced626117dffb4a18cef2b7af1288a27",
+        "status" : "passed",
+        "time" : {
+          "start" : 1600531752273,
+          "stop" : 1600531766372,
+          "duration" : 14099
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "ced626117dffb4a18cef2b7af1288a27"
+    } ],
+    "uid" : "0f7bae8d577ab6771ce5f46b203fbedf"
+  } ]
+}
