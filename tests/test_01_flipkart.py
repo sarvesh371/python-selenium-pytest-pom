@@ -1,6 +1,6 @@
 __author__ = "sarvesh.singh"
 
-from base.common import pytest
+from base.common import *
 
 
 @pytest.mark.FLIPKART
@@ -10,9 +10,9 @@ class TestFlipkart:
     This suite is created to test and automate the flipkart flow
     """
 
-    def test_01_launch_flipkart(self):
+    def test_01_launch_flipkart(self, web_driver):
         """
         Load flipkart website
         :return:
         """
-        print()
+        web_driver.open_website(url='')

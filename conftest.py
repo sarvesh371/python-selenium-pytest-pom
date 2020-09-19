@@ -98,9 +98,6 @@ def pytest_configure(config):
     config.option.self_contained_html = True
     config.option.verbose = 1
 
-    if config.getoption("test_data") is None:
-        config.option.test_data = "test_data.json"
-
     if config.getoption("allure_report_dir") is None:
         config.option.allure_report_dir = f"allure-results"
 
@@ -209,7 +206,7 @@ def resources():
     return get_resource_config()
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="session")
 def test_rails(resources, request):
     """
     Get and fetch Test-Rail Creds
@@ -265,10 +262,7 @@ def web_driver():
     Fixture to initialise the web driver
     :return:
     """
-    if os.environ.get('EXECUTOR_NUMBER', None):
-        driver = WebDriver(browser='chrome', remote='192.168.9.111', port='5432')
-    else:
-        driver = WebDriver(browser='chrome')
+    driver = WebDriver(browser='chrome')
     yield driver
     try:
         driver.driver.close()

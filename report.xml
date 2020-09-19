@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="1" failures="0" hostname="Sarvesh-Singh" name="pytest" skipped="0" tests="1" time="52.858" timestamp="2020-09-19T19:14:31.645819"><testcase classname="pytest" name="internal" time="0.000"><error message="internal error">Traceback (most recent call last):
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/_pytest/main.py&quot;, line 239, in wrap_session
+    session.exitstatus = doit(config, session) or 0
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/_pytest/main.py&quot;, line 295, in _main
+    config.hook.pytest_runtestloop(session=session)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/hooks.py&quot;, line 285, in __call__
+    return self._hookexec(self, self.get_hookimpls(), kwargs)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/manager.py&quot;, line 93, in _hookexec
+    return self._inner_hookexec(hook, methods, kwargs)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/manager.py&quot;, line 84, in &lt;lambda&gt;
+    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 207, in _multicall
+    return outcome.get_result()
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 79, in get_result
+    raise ex[1].with_traceback(ex[2])
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 186, in _multicall
+    res = hook_impl.function(*args)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/_pytest/main.py&quot;, line 320, in pytest_runtestloop
+    item.config.hook.pytest_runtest_protocol(item=item, nextitem=nextitem)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/hooks.py&quot;, line 285, in __call__
+    return self._hookexec(self, self.get_hookimpls(), kwargs)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/manager.py&quot;, line 93, in _hookexec
+    return self._inner_hookexec(hook, methods, kwargs)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/manager.py&quot;, line 84, in &lt;lambda&gt;
+    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 207, in _multicall
+    return outcome.get_result()
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 79, in get_result
+    raise ex[1].with_traceback(ex[2])
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 186, in _multicall
+    res = hook_impl.function(*args)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/flaky/flaky_pytest_plugin.py&quot;, line 94, in pytest_runtest_protocol
+    self.runner.pytest_runtest_protocol(item, nextitem)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/_pytest/runner.py&quot;, line 101, in pytest_runtest_protocol
+    runtestprotocol(item, nextitem=nextitem)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/_pytest/runner.py&quot;, line 112, in runtestprotocol
+    rep = call_and_report(item, &quot;setup&quot;, log)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/flaky/flaky_pytest_plugin.py&quot;, line 141, in call_and_report
+    report = hook.pytest_runtest_makereport(item=item, call=call)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/hooks.py&quot;, line 285, in __call__
+    return self._hookexec(self, self.get_hookimpls(), kwargs)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/manager.py&quot;, line 93, in _hookexec
+    return self._inner_hookexec(hook, methods, kwargs)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/manager.py&quot;, line 84, in &lt;lambda&gt;
+    self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 202, in _multicall
+    gen.send(outcome)
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/_pytest/skipping.py&quot;, line 264, in pytest_runtest_makereport
+    rep = outcome.get_result()
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 79, in get_result
+    raise ex[1].with_traceback(ex[2])
+  File &quot;/Users/sarveshsingh/Github/python-selenium-pytest-pom/venv/lib/python3.8/site-packages/pluggy/callers.py&quot;, line 181, in _multicall
+    next(gen)  # first yield
+TypeError: &apos;NoneType&apos; object is not an iterator</error></testcase></testsuite></testsuites>

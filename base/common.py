@@ -32,6 +32,7 @@ from bs4 import BeautifulSoup
 import zipfile
 import secrets
 import logging.handlers
+import pytest
 
 logger = Logger(name="COMMON").get_logger
 
@@ -87,7 +88,7 @@ def get_resource_config():
     """
     Function to Read URL resource config File
     """
-    data = Path(__file__).parent / "resources/config.json"
+    data = Path(__file__).parent.parent / "resources/config.json"
     return read_json_file(data, nt=True)
 
 
