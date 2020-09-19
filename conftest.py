@@ -137,19 +137,6 @@ def pytest_runtest_teardown(item, nextitem):
     pass
 
 
-@pytest.hookimpl(trylast=True, hookwrapper=True)
-def pytest_runtest_makereport():
-    """
-    This is a run into the report generated after a test case
-    is done executing
-    The hook here is used to add results to testrail/zephyr/reports after execution of a test case
-    :param item:
-    :param call:
-    :return:
-    """
-    pass
-
-
 @pytest.fixture(scope="session")
 def db_connect():
     """

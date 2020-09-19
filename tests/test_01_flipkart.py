@@ -10,9 +10,11 @@ class TestFlipkart:
     This suite is created to test and automate the flipkart flow
     """
 
-    def test_01_launch_flipkart(self, web_driver):
+    def test_01_launch_flipkart(self, web_driver, resources):
         """
         Load flipkart website
         :return:
+        :param web_driver
+        :param resources
         """
-        web_driver.open_website(url='')
+        web_driver.open_website(url=resources.url.flipkart.url)

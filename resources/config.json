@@ -1,12 +1,12 @@
 {
-  "Url": {
-    "Virgin": {
+  "url": {
+    "virgin": {
       "url": "https://www.virginvoyages.com/book/voyage-planner/find-a-voyage"
     },
-    "Flipkart": {
+    "flipkart": {
       "url": "https://www.flipkart.com/"
     },
-    "Myntra": {
+    "myntra": {
       "url": "https://www.myntra.com/"
     }
   }
