@@ -15,7 +15,9 @@ class HomePage:
         """
         self.webDriver = web_driver
         self.locators = dict_to_ns({
-            "loader": "//div[@class='']",
+            "closePopUp": "//*[@class='_2AkmmA _29YdH8']",
+            "searchBox": "//input[@class='LM6RPg']",
+            "searchButton": "//button[@class='vh79eN']",
         })
 
     def close_pop_up(self):
@@ -23,5 +25,19 @@ class HomePage:
         Close the signup pop up
         :return:
         """
-        print()
+        self.webDriver.click(element=self.locators.closePopUp, locator_type='xpath')
 
+    def search_apple(self):
+        """
+        Search Apple
+        :return:
+        """
+        self.webDriver.set_text(element=self.locators.searchBox, locator_type='xpath', text='apple')
+
+    def click_search(self):
+        """
+        Click the search button
+        :return:
+        """
+        self.webDriver.click(element=self.locators.searchButton, locator_type='xpath')
+        self.webDriver.wait_for(seconds=5)

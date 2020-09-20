@@ -203,13 +203,6 @@ class WebDriver:
             # TODO: add support to download FireFox Driver here
             raise Exception(f"self.browser is not supported Yet !!")
 
-    def __del__(self):
-        """
-        This function is used to close the all active window of browser
-        """
-        self.driver.close()
-        time.sleep(5)
-
     def open_website(self, url):
         """
         This function is used to open the website in browser
