@@ -24,3 +24,4 @@ class HomePage:
         :return:
         """
         print()
+

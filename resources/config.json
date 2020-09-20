@@ -1,13 +1,7 @@
 {
   "url": {
-    "virgin": {
-      "url": "https://www.virginvoyages.com/book/voyage-planner/find-a-voyage"
-    },
-    "flipkart": {
-      "url": "https://www.flipkart.com/"
-    },
-    "myntra": {
-      "url": "https://www.myntra.com/"
-    }
+    "virgin": "https://www.virginvoyages.com/book/voyage-planner/find-a-voyage",
+    "flipkart": "https://www.flipkart.com",
+    "myntra": "https://www.myntra.com"
   }
 }

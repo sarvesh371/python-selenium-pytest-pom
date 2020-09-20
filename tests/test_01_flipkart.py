@@ -20,5 +20,5 @@ class TestFlipkart:
         :param resources
         """
         setattr(page, 'home', HomePage(web_driver))
-        web_driver.open_website(url=resources.url.flipkart.url)
+        web_driver.open_website(url=resources.url.flipkart)
         page.home.close_pop_up()
