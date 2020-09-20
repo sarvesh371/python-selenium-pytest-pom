@@ -15,5 +15,5 @@ class HomePage:
         """
         self.webDriver = web_driver
         self.locators = dict_to_ns({
-            "loader": "//div[@class='LoaderContainer__div']//img",
+            "loader": "//div[@class='']",
         })
