@@ -216,7 +216,7 @@ class WebDriver:
         :param url:
         """
         self.driver.get(url)
-        self.wait_for(seconds=10)
+        self.wait_for(seconds=5)
 
     def navigate_back(self):
         """

@@ -17,3 +17,10 @@ class HomePage:
         self.locators = dict_to_ns({
             "loader": "//div[@class='']",
         })
+
+    def close_pop_up(self):
+        """
+        Close the signup pop up
+        :return:
+        """
+        print()

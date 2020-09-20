@@ -21,4 +21,4 @@ class TestFlipkart:
         """
         setattr(page, 'home', HomePage(web_driver))
         web_driver.open_website(url=resources.url.flipkart.url)
-        web_driver.allure_attach_jpeg("test")
+        page.home.close_pop_up()
