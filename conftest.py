@@ -12,6 +12,8 @@ from base.slack_api import SlackNotification
 from base.bitbucket import BitBucketApi
 from base.web_drivers import WebDriver
 from kafka import KafkaConsumer
+from pages.home_page import HomePage
+from pages.search_results import SearchResults
 
 logger = Logger(name="CONF_COMMON").get_logger
 
@@ -258,10 +260,12 @@ def web_driver():
 
 
 @pytest.fixture(scope='session')
-def pages():
+def pages(web_driver):
     """
     Fixture to initialise the Page Class
     :return:
     """
     named_tuple = namedtuple("pages", ["pages"])
+    setattr(named_tuple, 'home', HomePage(web_driver=web_driver))
+    setattr(named_tuple, 'search', SearchResults(web_driver=web_driver))
     return named_tuple

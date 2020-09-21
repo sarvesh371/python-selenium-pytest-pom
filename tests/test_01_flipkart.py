@@ -1,8 +1,6 @@
 __author__ = "sarvesh.singh"
 
 from base.common import *
-from pages.home_page import HomePage
-from pages.search_results import SearchResults
 
 
 @pytest.mark.FLIPKART
@@ -20,8 +18,6 @@ class TestFlipkart:
         :param pages
         :param resources
         """
-        setattr(pages, 'home', HomePage(web_driver))
-        setattr(pages, 'search', SearchResults(web_driver))
         web_driver.open_website(url=resources.url.flipkart)
         web_driver.allure_attach_jpeg(file_name='homePage')
         pages.home.close_pop_up()
