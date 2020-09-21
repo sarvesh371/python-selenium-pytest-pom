@@ -73,10 +73,11 @@ class WebDriver:
                 self.logger.debug(f"Local Android Appium Driver")
                 os_path = os.environ.get('PATH', None)
                 os_path = list(set(os_path.split(":")))
-                os_path.append("/Users/sarvesh.singh/Library/Android/sdk/tools")
-                os_path.append("/Users/sarvesh.singh/Library/Android/sdk/platform-tools")
+                user = str(run_cmd("whoami").output).strip()
+                os_path.append(f"/Users/{user}/Library/Android/sdk/tools")
+                os_path.append(f"/Users/{user}/Library/Android/sdk/platform-tools")
                 os.environ['PATH'] = ":".join(os_path)
-                os.environ['ANDROID_HOME'] = "/Users/sarvesh.singh/Library/Android/sdk"
+                os.environ['ANDROID_HOME'] = f"/Users/{user}/Library/Android/sdk"
                 os.environ['JAVA_HOME'] = str(run_cmd("/usr/libexec/java_home").output).strip()
                 # device_version = str(run_cmd('adb shell getprop ro.build.version.release').output).strip()
                 run_cmd("appium --chromedriver-executable /usr/local/bin/chromedriver", wait=False)
@@ -89,7 +90,7 @@ class WebDriver:
                     'appActivity': '.MainActivity',
                     'INSTALL_GRANT_RUNTIME_PERMISSIONS': True,
                     'newCommandTimeout': 300,
-                    'app': '/Users/sarvesh.singh/Downloads/flipkart.apk'
+                    'app': f'/Users/{user}/Downloads/flipkart.apk'
                 }
                 self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
             elif self.browser == 'ios':
