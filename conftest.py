@@ -263,6 +263,7 @@ def web_driver():
 def pages(web_driver):
     """
     Fixture to initialise the Page Class
+    :param web_driver
     :return:
     """
     named_tuple = namedtuple("pages", ["pages"])
