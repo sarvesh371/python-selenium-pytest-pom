@@ -766,6 +766,19 @@ class WebDriver:
                 count = count + 1
         return flag
 
+    @staticmethod
+    def stop_appium():
+        """
+        This function to stop the appium
+        """
+        run_cmd("killall node", wait=False)
+
+    def submit(self):
+        """
+        Function to click enter in mobile soft keyboard
+        """
+        self.driver.execute_script("mobile:performEditorAction", {'action': 'search'})
+
 
 if __name__ == "__main__":
     w = WebDriver(browser='chrome', remote='192.168.9.111', port='5432')
