@@ -258,10 +258,10 @@ def web_driver():
 
 
 @pytest.fixture(scope='session')
-def page():
+def pages():
     """
     Fixture to initialise the Page Class
     :return:
     """
-    named_tuple = namedtuple("page", ["page"])
+    named_tuple = namedtuple("pages", ["pages"])
     return named_tuple
