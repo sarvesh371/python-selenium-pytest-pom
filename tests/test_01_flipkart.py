@@ -33,9 +33,9 @@ class TestFlipkart:
         pages.home.click_search()
         web_driver.allure_attach_jpeg(file_name='searchResults')
 
-    def test_03_write_result_file(self, pages):
+    def test_03_print_result(self, pages):
         """
-        Create a file and write all results in a file with name and price
+        Print apple device name and price
         :return:
         :param pages
         """

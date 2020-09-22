@@ -139,6 +139,31 @@ def pytest_runtest_teardown(item, nextitem):
     pass
 
 
+@pytest.hookimpl(trylast=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    """
+    This is a run into the report generated after a test case
+    is done executing
+    :param item:
+    :param call:
+    :return:
+    """
+    logger.debug(f"Making Test Report")
+    outcome = yield
+    report = outcome.get_result()
+
+
+@pytest.fixture(autouse=True, scope="session")
+def tear_down_fixture(request):
+    """
+    Teardown Fixture
+    :param request:
+    :return:
+    """
+    logger.debug(f"Tearing Down")
+    yield
+
+
 @pytest.fixture(scope="session")
 def db_connect():
     """
