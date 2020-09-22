@@ -1,15 +1,14 @@
 __author__ = 'sarvesh.singh'
 
 import distro
-from selenium import webdriver as seleniumWebDriver
+from selenium import webdriver as seleniumwebdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from appium import webdriver
-from PIL import Image
 import pathlib
 from base.common import (
     run_cmd,
@@ -47,11 +46,11 @@ class WebDriver:
         if remote is None:
             if self.browser == 'chrome':
                 self.logger.debug(f"Local Chrome Driver")
-                options = seleniumWebDriver.ChromeOptions()
+                options = seleniumwebdriver.ChromeOptions()
                 options.add_argument("--no-sandbox")
                 options.add_argument("--privileged")
                 options.add_experimental_option('prefs', {'download.default_directory': download_path})
-                self.driver = seleniumWebDriver.Chrome(
+                self.driver = seleniumwebdriver.Chrome(
                     executable_path=self._get_latest_driver(),
                     desired_capabilities=options.to_capabilities(),
                     chrome_options=options
@@ -60,10 +59,10 @@ class WebDriver:
                 self.driver.maximize_window()
             elif self.browser == 'firefox':
                 self.logger.debug(f"Local Firefox Driver")
-                options = seleniumWebDriver.FirefoxOptions()
+                options = seleniumwebdriver.FirefoxOptions()
                 options.add_argument("--no-sandbox")
                 options.add_argument("--privileged")
-                self.driver = seleniumWebDriver.Firefox(
+                self.driver = seleniumwebdriver.Firefox(
                     executable_path=self._get_latest_driver(),
                     desired_capabilities=options.to_capabilities()
                 )
@@ -107,7 +106,7 @@ class WebDriver:
                     'timeouts': {'implicit': 60}, 'prefs': {'download.default_directory': download_path},
                     'goog:chromeOptions': {'extensions': [], 'args': ['--no-sandbox', '--privileged']}
                 }
-                self.driver = seleniumWebDriver.Remote(
+                self.driver = seleniumwebdriver.Remote(
                     command_executor=self.remote_server,
                     desired_capabilities=capabilities,
                 )
@@ -115,8 +114,8 @@ class WebDriver:
                 self.driver.maximize_window()
             elif self.browser == 'firefox':
                 self.logger.debug(f"Remote Firefox Driver")
-                options = seleniumWebDriver.FirefoxOptions()
-                self.driver = seleniumWebDriver.Remote(
+                options = seleniumwebdriver.FirefoxOptions()
+                self.driver = seleniumwebdriver.Remote(
                     command_executor=self.remote_server,
                     desired_capabilities=options.to_capabilities(),
                 )
@@ -346,7 +345,7 @@ class WebDriver:
         :param locator_type:
         """
         element = WebDriverWait(self.driver, 60).until(
-            EC.element_to_be_clickable((self.get_locator_type(locator_type), element)))
+            ec.element_to_be_clickable((self.get_locator_type(locator_type), element)))
         element.click()
 
     def explicit_check_element_is_click(self, element, locator_type, time_out):
@@ -357,7 +356,7 @@ class WebDriver:
         :param time_out:
         """
         WebDriverWait(self.driver, time_out).until(
-            EC.element_to_be_clickable((self.get_locator_type(locator_type), element)))
+            ec.element_to_be_clickable((self.get_locator_type(locator_type), element)))
 
     def explicit_visibility_of_element(self, element, locator_type, time_out):
         """
@@ -367,7 +366,7 @@ class WebDriver:
         :param time_out:
         """
         WebDriverWait(self.driver, time_out).until(
-            EC.visibility_of_element_located((self.get_locator_type(locator_type), element)))
+            ec.visibility_of_element_located((self.get_locator_type(locator_type), element)))
 
     def explicit_invisibility_of_element(self, element, locator_type, time_out):
         """
@@ -377,7 +376,7 @@ class WebDriver:
         :param time_out:
         """
         WebDriverWait(self.driver, time_out).until(
-            EC.invisibility_of_element((self.get_locator_type(locator_type), element)))
+            ec.invisibility_of_element((self.get_locator_type(locator_type), element)))
 
     def set_text(self, element, locator_type, text):
         """
@@ -514,7 +513,7 @@ class WebDriver:
         :param locator_type:
         :return:
         """
-        WebDriverWait(self.driver, 60).until(EC.invisibility_of_element(self.get_web_element(element, locator_type)))
+        WebDriverWait(self.driver, 60).until(ec.invisibility_of_element(self.get_web_element(element, locator_type)))
 
     def scroll(self, pixel_x, pixel_y):
         """
@@ -785,4 +784,3 @@ if __name__ == "__main__":
     w = WebDriver(browser='chrome', remote='192.168.9.111', port='5432')
     w.open_website('http://www.yahoo.com')
     w.screen_shot('sample.png')
-    w.__del__()

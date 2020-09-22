@@ -210,13 +210,13 @@ def jenkins():
     return jenkins
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(autouse=True, scope="session")
 def resources():
     """
-    resources Fixture with all Credentials and Url
+    resources Fixture with all Url
     :return:
     """
-    logger.debug(f"Reading Creds File")
+    logger.debug(f"Reading Resource File")
     return get_resource_config()
 
 
