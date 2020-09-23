@@ -7,6 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.action_chains import ActionChains
+from appium.webdriver.common.touch_action import TouchAction
 from selenium.webdriver.common.by import By
 from appium import webdriver
 import pathlib
@@ -542,6 +543,12 @@ class WebDriver:
         This function is used to scroll the complete web page bottom to top
         """
         self.driver.execute_script("window.scrollTo(document.body.scrollHeight, 0);")
+
+    def scroll_mobile(self, x_press, y_press, x_move, y_move):
+        """
+        Function to scroll in mobile device as per coordinates
+        """
+        TouchAction(self.driver).press(x=x_press, y=y_press).move_to(x=x_move, y=y_move).release().perform()
 
     def key_chains(self):
         """
