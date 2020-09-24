@@ -297,34 +297,6 @@ class WebDriver:
             raise Exception(f'Provided locator type {locator_type} is not supported !!')
         return elements
 
-    @staticmethod
-    def get_locator_type(locator_type):
-        """
-        This function is used to return the locator type
-        :param locator_type:
-        :return:
-        """
-        if locator_type == 'id':
-            locator_type = By.ID
-        elif locator_type == 'name':
-            locator_type = By.NAME
-        elif locator_type == 'xpath':
-            locator_type = By.XPATH
-        elif locator_type == 'class':
-            locator_type = By.CLASS_NAME
-        elif locator_type == 'tag':
-            locator_type = By.TAG_NAME
-        elif locator_type == 'css':
-            locator_type = By.CSS_SELECTOR
-        elif locator_type == 'link':
-            locator_type = By.LINK_TEXT
-        elif locator_type == 'partial_link':
-            locator_type = By.PARTIAL_LINK_TEXT
-        else:
-            raise Exception(f'Provided locator type {locator_type} is not supported !!')
-
-        return locator_type
-
     def click(self, element, locator_type):
         """
         This function is used to click on the buttons, radio button, checkbox etc. available on web page
@@ -346,10 +318,10 @@ class WebDriver:
         :param locator_type:
         """
         element = WebDriverWait(self.driver, 60).until(
-            ec.element_to_be_clickable((self.get_locator_type(locator_type), element)))
+            ec.element_to_be_clickable((self.get_web_element(element=element, locator_type=locator_type))))
         element.click()
 
-    def explicit_check_element_is_click(self, element, locator_type, time_out):
+    def explicit_check_element_is_clickable(self, element, locator_type, time_out):
         """
         This function is used to check the element is clickable or not and wait till explict condition meet
         :param element:
@@ -357,7 +329,7 @@ class WebDriver:
         :param time_out:
         """
         WebDriverWait(self.driver, time_out).until(
-            ec.element_to_be_clickable((self.get_locator_type(locator_type), element)))
+            ec.element_to_be_clickable((self.get_web_element(element=element, locator_type=locator_type))))
 
     def explicit_visibility_of_element(self, element, locator_type, time_out):
         """
@@ -367,17 +339,17 @@ class WebDriver:
         :param time_out:
         """
         WebDriverWait(self.driver, time_out).until(
-            ec.visibility_of_element_located((self.get_locator_type(locator_type), element)))
+            ec.visibility_of_element_located((self.get_web_element(element=element, locator_type=locator_type))))
 
-    def explicit_invisibility_of_element(self, element, locator_type, time_out):
+    def wait_till_element_invisible(self, element, locator_type):
         """
-        This function is used to check the invisibility on element till wait for explict condition meet
+        Explicit wait till element is not visible
         :param element:
         :param locator_type:
-        :param time_out:
+        :return:
         """
-        WebDriverWait(self.driver, time_out).until(
-            ec.invisibility_of_element((self.get_locator_type(locator_type), element)))
+        WebDriverWait(self.driver, 60).until(
+            ec.invisibility_of_element(self.get_web_element(element=element, locator_type=locator_type)))
 
     def set_text(self, element, locator_type, text):
         """
@@ -432,7 +404,7 @@ class WebDriver:
         :param locator_type:
         :return:
         """
-        if self.get_web_element(element, locator_type).size > 0:
+        if len(self.get_elements(element, locator_type)) > 0:
             return True
         else:
             return False
@@ -445,12 +417,8 @@ class WebDriver:
         :return:
         """
         try:
-            if self.get_web_element(element, locator_type).is_displayed():
-                return True
-            else:
-                return False
-        except(Exception, ValueError) as exp:
-            print(exp)
+            return self.get_web_element(element, locator_type).is_displayed()
+        except Exception:
             return False
 
     def is_element_selected(self, element, locator_type):
@@ -460,10 +428,7 @@ class WebDriver:
         :param locator_type:
         :return:
         """
-        if self.get_web_element(element, locator_type).is_selected():
-            return True
-        else:
-            return False
+        return self.get_web_element(element, locator_type).is_selected()
 
     def is_element_enabled(self, element, locator_type):
         """
@@ -472,10 +437,7 @@ class WebDriver:
         :param locator_type:
         :return:
         """
-        if self.get_web_element(element, locator_type).is_enabled():
-            return True
-        else:
-            return False
+        return self.get_web_element(element, locator_type).is_enabled()
 
     @staticmethod
     def wait_for(seconds):
@@ -494,7 +456,7 @@ class WebDriver:
         while flag is False and count <= 40:
             flag = self.is_element_display_on_screen(element, locator_type)
             self.wait_for(2)
-            count = count + 1
+            count += 1
 
     def wait_till_element_disappear_from_screen(self, element, locator_type):
         """
@@ -502,19 +464,10 @@ class WebDriver:
         """
         flag = True
         count = 1
-        while flag is True and count <= 40:
+        while flag and count <= 40:
             flag = self.is_element_display_on_screen(element, locator_type)
             self.wait_for(2)
-            count = count + 1
-
-    def wait_till_element_invisible(self, element, locator_type):
-        """
-        Explicit wait till element is not visible
-        :param element:
-        :param locator_type:
-        :return:
-        """
-        WebDriverWait(self.driver, 60).until(ec.invisibility_of_element(self.get_web_element(element, locator_type)))
+            count += 1
 
     def scroll(self, pixel_x, pixel_y):
         """
@@ -534,7 +487,7 @@ class WebDriver:
 
     def scroll_complete_page(self):
         """
-        This function is used to scroll the complete web page
+        This function is used to scroll the complete web page to bottom
         """
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -666,8 +619,7 @@ class WebDriver:
         Get Current Window
         :return:
         """
-        main_window = self.driver.current_window_handle
-        return main_window
+        return self.driver.current_window_handle
 
     def open_and_switch_to_new_tab(self, index):
         """
