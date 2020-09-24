@@ -40,4 +40,3 @@ class HomePage:
         :return:
         """
         self.webDriver.click(element=self.locators.searchButton, locator_type='xpath')
-        self.webDriver.wait_for(seconds=5)

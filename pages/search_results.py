@@ -18,6 +18,7 @@ class SearchResults:
         self.locators = dict_to_ns({
             "resultsName": "//*[@class='_2cLu-l']",
             "resultsPrice": "%s/../a[3]/div/div[1]",
+            "searchResultsPage": "//span[contains(text(), 'Showing ')]",
         })
         self.logger = Logger(name="RESULTS").get_logger
 
@@ -26,6 +27,8 @@ class SearchResults:
         print the search results in console
         :return:
         """
+        self.webDriver.explicit_visibility_of_element(element=self.locators.searchResultsPage, locator_type='xpath',
+                                                      time_out=60)
         results_name = self.webDriver.get_elements(element=self.locators.resultsName, locator_type='xpath')
         results_price = self.webDriver.get_elements(element=self.locators.resultsPrice % self.locators.resultsName,
                                                     locator_type='xpath')

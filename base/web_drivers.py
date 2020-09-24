@@ -297,6 +297,34 @@ class WebDriver:
             raise Exception(f'Provided locator type {locator_type} is not supported !!')
         return elements
 
+    @staticmethod
+    def get_locator_type(locator_type):
+        """
+        This function is used to return the locator type
+        :param locator_type:
+        :return:
+        """
+        if locator_type == 'id':
+            locator_type = By.ID
+        elif locator_type == 'name':
+            locator_type = By.NAME
+        elif locator_type == 'xpath':
+            locator_type = By.XPATH
+        elif locator_type == 'class':
+            locator_type = By.CLASS_NAME
+        elif locator_type == 'tag':
+            locator_type = By.TAG_NAME
+        elif locator_type == 'css':
+            locator_type = By.CSS_SELECTOR
+        elif locator_type == 'link':
+            locator_type = By.LINK_TEXT
+        elif locator_type == 'partial_link':
+            locator_type = By.PARTIAL_LINK_TEXT
+        else:
+            raise Exception(f'Provided locator type {locator_type} is not supported !!')
+
+        return locator_type
+
     def click(self, element, locator_type):
         """
         This function is used to click on the buttons, radio button, checkbox etc. available on web page
@@ -318,7 +346,7 @@ class WebDriver:
         :param locator_type:
         """
         element = WebDriverWait(self.driver, 60).until(
-            ec.element_to_be_clickable((self.get_web_element(element=element, locator_type=locator_type))))
+            ec.element_to_be_clickable((self.get_locator_type(locator_type), element)))
         element.click()
 
     def explicit_check_element_is_clickable(self, element, locator_type, time_out):
@@ -329,7 +357,7 @@ class WebDriver:
         :param time_out:
         """
         WebDriverWait(self.driver, time_out).until(
-            ec.element_to_be_clickable((self.get_web_element(element=element, locator_type=locator_type))))
+            ec.element_to_be_clickable((self.get_locator_type(locator_type), element)))
 
     def explicit_visibility_of_element(self, element, locator_type, time_out):
         """
@@ -339,17 +367,17 @@ class WebDriver:
         :param time_out:
         """
         WebDriverWait(self.driver, time_out).until(
-            ec.visibility_of_element_located((self.get_web_element(element=element, locator_type=locator_type))))
+            ec.visibility_of_element_located((self.get_locator_type(locator_type), element)))
 
-    def wait_till_element_invisible(self, element, locator_type):
+    def explicit_invisibility_of_element(self, element, locator_type, time_out):
         """
         Explicit wait till element is not visible
         :param element:
         :param locator_type:
         :return:
         """
-        WebDriverWait(self.driver, 60).until(
-            ec.invisibility_of_element(self.get_web_element(element=element, locator_type=locator_type)))
+        WebDriverWait(self.driver, time_out).until(
+            ec.invisibility_of_element((self.get_locator_type(locator_type), element)))
 
     def set_text(self, element, locator_type, text):
         """
