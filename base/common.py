@@ -32,7 +32,6 @@ from bs4 import BeautifulSoup
 import zipfile
 import secrets
 import logging.handlers
-import pytest
 
 logger = Logger(name="COMMON").get_logger
 

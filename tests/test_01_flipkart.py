@@ -1,6 +1,6 @@
 __author__ = "sarvesh.singh"
 
-from base.common import *
+import pytest
 
 
 @pytest.mark.FLIPKART
