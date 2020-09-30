@@ -34,5 +34,6 @@ class SearchResults:
                                                     locator_type='xpath')
         for _result in results_name:
             name = _result.text
-            price = results_price[results_name.index(_result)].text
+            index = results_name.index(_result)
+            price = results_price[index].text
             self.logger.info(f'Device Name - {name} | Price - {price}')
