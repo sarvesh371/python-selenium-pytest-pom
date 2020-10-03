@@ -24,7 +24,7 @@ This is a framework for automation web application using python with pytest and 
 1. base - It contains all the web drivers, common functions and workers functions
 2. resources - It contains all the url's, configurations which will be used throughout the project
 3. pages - It contains all the pages class and their methods to implement POM
-4. tests - tests - It contains the test class which needs to be triggered
+4. tests - It contains the test class which needs to be triggered
 5. screenshots - We will store all our screenshots in this folder
 6. allure_results - folder to save our allure report
     
