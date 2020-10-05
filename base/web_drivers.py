@@ -79,6 +79,7 @@ class WebDriver:
                 os.environ['PATH'] = ":".join(os_path)
                 os.environ['ANDROID_HOME'] = f"/Users/{user}/Library/Android/sdk"
                 os.environ['JAVA_HOME'] = str(run_cmd("/usr/libexec/java_home").output).strip()
+                apk_path = str(Path(__file__).parent.parent / "resources/com.flipkart.android.apk")
                 # device_version = str(run_cmd('adb shell getprop ro.build.version.release').output).strip()
                 run_cmd("appium --chromedriver-executable /usr/local/bin/chromedriver", wait=False)
                 self.wait_for(10)
@@ -90,7 +91,7 @@ class WebDriver:
                     'appActivity': '.MainActivity',
                     'INSTALL_GRANT_RUNTIME_PERMISSIONS': True,
                     'newCommandTimeout': 300,
-                    'app': f'/Users/{user}/Downloads/flipkart.apk'
+                    'app': apk_path
                 }
                 self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
             elif self.browser == 'ios':

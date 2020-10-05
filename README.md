@@ -1,5 +1,5 @@
 # python-selenium-pytest-pom
-This is a framework for automation web application using python with pytest and pom framework
+This is a framework for automating web application using python with pytest and pom framework
 
 **Pre Requisites**
 1. Download and setup python3 from : https://www.python.org/downloads/
