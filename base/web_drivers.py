@@ -14,8 +14,8 @@ import pathlib
 from base.common import (
     run_cmd,
     get_adb_device,
+    basic_logging,
 )
-from base.logger import Logger
 import zipfile
 import os
 import re
@@ -41,7 +41,7 @@ class WebDriver:
         """
         self.browser = str(browser).lower()
         self.osName = distro.name().lower()
-        self.logger = Logger(name='DRIVER').get_logger
+        self.logger = basic_logging(name="DRIVER", level='DEBUG')
         download_path = os.getcwd() + '/downloaded_files/'
 
         if remote is None:

@@ -1,7 +1,6 @@
 __author__ = "sarvesh.singh"
 
-from base.common import dict_to_ns
-from base.logger import Logger
+from base.common import dict_to_ns, basic_logging
 
 
 class SearchResults:
@@ -20,7 +19,7 @@ class SearchResults:
             "resultsPrice": "%s/../a[3]/div/div[1]",
             "searchResultsPage": "//span[contains(text(), 'Showing ')]",
         })
-        self.logger = Logger(name="RESULTS").get_logger
+        self.logger = basic_logging(name="SEARCH", level='INFO')
 
     def print_search_results(self):
         """
