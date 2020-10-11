@@ -16,7 +16,7 @@ This is a framework for automating web application using python with pytest and 
 4. Activate the virtual environment 
     
     `source venv/bin/activate`
-    5. Run test using pytest command and tests directory
+5. Run test using pytest command and tests directory
 
     ` pytest tests`
 6. Get Allure report by running
