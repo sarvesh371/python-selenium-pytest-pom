@@ -16,10 +16,15 @@ This is a framework for automating web application using python with pytest and 
 4. Activate the virtual environment 
     
     `source venv/bin/activate`
-5. Run test using pytest command and tests directory
+    5. Run test using pytest command and tests directory
 
     ` pytest tests`
+6. Get Allure report by running
 
+    a. run `allure serve` to get the allure report on localhost
+
+    b. run `allure generate` to generate a allure report and it will be saved under /allure-report
+    
 **Project Structure**
 1. base - It contains all the web drivers, common functions and workers functions
 2. resources - It contains all the url's, configurations which will be used throughout the project
